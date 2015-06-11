@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+
+
+<generatorConfiguration> 
+   
+  <context id="mysqlTables" targetRuntime="MyBatis3">
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://qdm163845575.my3w.com:3306/qdm163845575_db?characterEncoding=utf8"
+     userId="qdm163845575" password="mysqladmin"/>
+    
+    <!-- 指定生成的类型为java类型，避免数据库中number等类型字段 -->
+    <javaTypeResolver>
+      <property name="forceBigDecimals" value="false"/>
+    </javaTypeResolver>
+    
+    <!-- 生成model模型，对应的包，存放位置可以指定具体的路径,如/ProjectName/src，也可以使用MAVEN来自动生成 -->
+    <javaModelGenerator targetPackage="com.jqw.m.bean" targetProject="MAVEN">
+      <property name="enableSubPackages" value="true"/>
+    </javaModelGenerator>
+    
+    <!--对应的xml mapper文件  -->
+    <sqlMapGenerator targetPackage="com.jqw.m.config.sqlxml" targetProject="MAVEN">
+      <property name="enableSubPackages" value="true"/>
+    </sqlMapGenerator>
+    
+    <!-- 对应的dao接口 -->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.jqw.m.bean.mapper" targetProject="MAVEN">
+      <property name="enableSubPackages" value="true"/>
+    </javaClientGenerator>
+    
+    
+    <!-- <table tableName="t_ip" domainObjectName="T_Ip"/> -->
+    
+    <table tableName="t_cpu"  domainObjectName="TCpu"></table>
+    <table tableName="t_graphicscard"  domainObjectName="TGraphicscard"></table>
+    <table tableName="t_hardpan"  domainObjectName="THardpan"></table>
+    <table tableName="t_ip"  domainObjectName="TIp"></table>
+    <table tableName="t_mainboard"  domainObjectName="TMainboard"></table>
+    <table tableName="t_memory"  domainObjectName="TMemory"></table>
+    <table tableName="t_network_card"  domainObjectName="TNetworkCard"></table>
+    <table tableName="t_server_disk"  domainObjectName="TServerDisk"></table>
+    <table tableName="t_sound_card"  domainObjectName="TSoundCard"></table>
+  </context>
+</generatorConfiguration>

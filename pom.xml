@@ -1,0 +1,97 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.cgl</groupId>
+  <artifactId>mybatis_generator</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>mybatis_generator</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    
+    <mybatis-generator.version>1.3.1</mybatis-generator.version>
+    <mysql.version>5.1.13</mysql.version>
+    <mybatis.version>3.0.3</mybatis.version>
+  </properties>
+  
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql.version}</version>
+    </dependency>
+  
+    <dependency>
+      <groupId>org.mybatis.generator</groupId>
+      <artifactId>mybatis-generator-core</artifactId>
+      <version>${mybatis-generator.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>${mybatis.version}</version>
+    </dependency>
+    
+  </dependencies>
+  
+  <build>
+    <finalName>mybatis-generator</finalName>
+  <plugins>
+    <plugin>
+      <groupId>org.mybatis.generator</groupId>
+      <artifactId>mybatis-generator-maven-plugin</artifactId>
+      <version>${mybatis-generator.version}</version>
+      <dependencies>
+      <!-- 数据库驱动  -->
+        <dependency>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
+          <version>${mysql.version}</version>
+        </dependency>
+    
+      </dependencies>
+      <!-- 自动生成 -->
+      <executions>
+        <execution>
+          <id>Generate MyBatis Artifacts</id>
+          <goals>
+            <goal>generate</goal>
+          </goals>
+          <configuration>
+            <configurationFile>src/main/resources/config/mysqlGeneratorConfig.xml</configurationFile>
+            <overwrite>true</overwrite>
+            <jdbcDriver>com.mysql.jdbc.Driver</jdbcDriver>
+            <jdbcURL>jdbc:mysql://qdm163845575.my3w.com:3306/qdm163845575_db</jdbcURL>
+            <jdbcUserId>qdm163845575</jdbcUserId>
+            <jdbcPassword>mysqladmin</jdbcPassword>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
+  
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <configuration>
+        <source>1.8</source>
+        <target>1.8</target>
+        <encoding>UTF-8</encoding>
+      </configuration>
+    </plugin>
+
+    </plugins>
+  </build>
+</project>
