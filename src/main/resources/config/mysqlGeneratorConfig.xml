@@ -43,5 +43,6 @@
     <table tableName="t_network_card"  domainObjectName="TNetworkCard"></table>
     <table tableName="t_server_disk"  domainObjectName="TServerDisk"></table>
     <table tableName="t_sound_card"  domainObjectName="TSoundCard"></table>
+    <table tableName="t_link_record"  domainObjectName="TLinkRecord"></table>
   </context>
 </generatorConfiguration>
