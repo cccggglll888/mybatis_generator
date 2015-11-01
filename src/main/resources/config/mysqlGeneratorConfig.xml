@@ -3,13 +3,24 @@
   PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
+<!-- 官方文档 -->
+<!-- http://mybatis.github.io/generator/configreference/xmlconfig.html -->
+<!-- 代码托管 -->
+<!-- https://github.com/mybatis/generator -->
+
 <generatorConfiguration>
+	<!-- <classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" /> -->
 
 	<context id="mysqlTables" targetRuntime="MyBatis3">
-
-		<!-- 取消xml中的注释 -->
+		<!-- 前后分隔符 -->
+		<!-- <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/> -->
+        
 		<commentGenerator>
-			<property name="suppressAllComments" value="true" />
+			<!-- 取消xml中的注释默认false -->
+			<property name="suppressAllComments" value="false" />
+			<!-- 取消xml中的时间戳默认false -->
+			<property name="suppressDate" value="false" />
 		</commentGenerator>
 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
@@ -25,6 +36,7 @@
 		<javaModelGenerator targetPackage="com.jqw.m.bean"
 			targetProject="MAVEN">
 			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
 		<!--对应的xml mapper文件 -->
@@ -36,6 +48,8 @@
 		<!-- 对应的dao接口 -->
 		<javaClientGenerator type="XMLMAPPER"
 			targetPackage="com.jqw.m.bean.mapper" targetProject="MAVEN">
+			<!-- 从 MyBatis 3.2 开始使用了新的 SQL 生成器类。 如果您必须在 MyBatis 旧版本上运行，
+			在您的 < JavaClientGenerator > 配置上设置属性"useLegacyBuilder"为"true"。 -->
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
@@ -57,10 +71,28 @@
 			enableCountByExample="false" enableSelectByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false">
 			特定列指定对应类型
-			<columnOverride column="content" jdbcType="VARCHAR"
-				javaType="java.lang.String"></columnOverride>
+			<columnOverride column="content" jdbcType="VARCHAR" javaType="java.lang.String"></columnOverride>
 			<columnOverride column="photo" jdbcType="BLOB"></columnOverride>
+			排除列名
+			<ignoreColumn column="FRED" />
 		</table> -->
+		
+		<!-- <table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer" >
+			使用真实列明
+			<property name="useActualColumnNames" value="true"/>
+			主键设置
+			<generatedKey column="ID" sqlStatement="DB2" identity="true" />
+			设置排除列
+			<ignoreColumn column="FRED" />
+			指定对应列数据类型
+			<columnOverride column="DATE_FIELD" property="startDate" />
+			<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+		</table> -->
+		
+		<!-- <table>这里用的通配符匹配全部的表，另外所有表都有自动增长的id字段。如果不是所有表的配置都一样，可以做针对性的配置。 -->
+		<!-- <table tableName="%">
+            <generatedKey column="id" sqlStatement="Mysql"/>
+        </table> -->
 
 	</context>
 </generatorConfiguration>

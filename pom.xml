@@ -15,23 +15,27 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<mybatis-generator.version>1.3.2</mybatis-generator.version>
-		<mybatis.version>3.0.3</mybatis.version>
-		<mysql.version>5.1.13</mysql.version>
+		<mybatis-generator-maven-plugin>1.3.1</mybatis-generator-maven-plugin>
+		
+		<mybatis.version>3.2.3</mybatis.version>
+		<mysql.version>5.1.24</mysql.version>
 	</properties>
 
 
 	<dependencies>
-		<dependency>
+		<!-- <dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
-		</dependency>
+		</dependency> -->
+		<!-- 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
+		 -->
 
 		<dependency>
 			<groupId>mysql</groupId>
@@ -62,7 +66,8 @@
 			<plugin>
 				<groupId>org.mybatis.generator</groupId>
 				<artifactId>mybatis-generator-maven-plugin</artifactId>
-				<version>${mybatis-generator.version}</version>
+				<version>${mybatis-generator-maven-plugin}</version>
+				
 				<dependencies>
 					<!-- 数据库驱动 -->
 					<dependency>
@@ -70,8 +75,34 @@
 						<artifactId>mysql-connector-java</artifactId>
 						<version>${mysql.version}</version>
 					</dependency>
-
+					
+					<!-- <dependency>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+						<version>1.2.17</version>
+					</dependency> -->
+					
 				</dependencies>
+				
+				
+				<configuration>
+					<!-- 指定配置文件的名称。默认值:${basedir}/src/main/resources/generatorConfig.xml -->
+					<configurationFile>src/main/resources/config/mysqlGeneratorConfig.xml</configurationFile>
+
+					<!--如果这是真的,那么MBG将构建日志写进程消息。如果指定该参数，执行过程会输出到控制台。 -->
+					<verbose>true</verbose>
+					<!--允许覆盖生成的文件 -->
+					<overwrite>true</overwrite>
+
+					<!-- 
+					<jdbcDriver>com.mysql.jdbc.Driver</jdbcDriver>
+					<jdbcURL>jdbc:mysql://qdm163845575.my3w.com:3306/qdm163845575_db</jdbcURL>
+					<jdbcUserId>qdm163845575</jdbcUserId>
+					<jdbcPassword>mysqladmin</jdbcPassword>
+					 -->
+
+				</configuration>
+
 
 				<!-- 自动生成 -->
 				<executions>
@@ -80,20 +111,22 @@
 						<goals>
 							<goal>generate</goal>
 						</goals>
-						<configuration>
+						
+						<!-- <configuration>
 							<configurationFile>src/main/resources/config/mysqlGeneratorConfig.xml</configurationFile>
-
-							<!--允许移动生成的文件 -->
+		
+							如果这是真的,那么MBG将构建日志写进程消息。
 							<verbose>true</verbose>
-							<!--允许覆盖生成的文件 -->
+							允许覆盖生成的文件
 							<overwrite>true</overwrite>
-
-							<!-- <jdbcDriver>com.mysql.jdbc.Driver</jdbcDriver>
+		
+							<jdbcDriver>com.mysql.jdbc.Driver</jdbcDriver>
 							<jdbcURL>jdbc:mysql://qdm163845575.my3w.com:3306/qdm163845575_db</jdbcURL>
 							<jdbcUserId>qdm163845575</jdbcUserId>
-							<jdbcPassword>mysqladmin</jdbcPassword> -->
-
-						</configuration>
+							<jdbcPassword>mysqladmin</jdbcPassword>
+		
+						</configuration> -->
+						
 					</execution>
 				</executions>
 
