@@ -9,7 +9,7 @@
 <!-- https://github.com/mybatis/generator -->
 
 <generatorConfiguration>
-	<!-- <classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" /> -->
+	<classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" />
 
 	<context id="mysqlTables" targetRuntime="MyBatis3">
 		<!-- 前后分隔符 -->
@@ -24,8 +24,10 @@
 		</commentGenerator>
 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://qdm163845575.my3w.com:3306/qdm163845575_db?characterEncoding=utf8"
-			userId="qdm163845575" password="mysqladmin" />
+			connectionURL="jdbc:mysql://localhost:3306/oswingdb?characterEncoding=utf8"
+			userId="root"
+			password="root">
+		</jdbcConnection>
 
 		<!-- 指定生成的类型为java类型，避免数据库中number等类型字段 -->
 		<javaTypeResolver>
@@ -33,21 +35,20 @@
 		</javaTypeResolver>
 
 		<!-- 生成model模型，对应的包，存放位置可以指定具体的路径,如/ProjectName/src，也可以使用MAVEN来自动生成 -->
-		<javaModelGenerator targetPackage="com.jqw.m.bean"
-			targetProject="MAVEN">
+		<javaModelGenerator targetPackage="com.cgl.db.m.bean" targetProject="MAVEN">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
 		<!--对应的xml mapper文件 -->
-		<sqlMapGenerator targetPackage="com.jqw.m.config.sqlxml"
+		<sqlMapGenerator targetPackage="com.cgl.db.m.config.sqlxml"
 			targetProject="MAVEN">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<!-- 对应的dao接口 -->
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.jqw.m.bean.mapper" targetProject="MAVEN">
+			targetPackage="com.cgl.db.m.bean.mapper" targetProject="MAVEN">
 			<!-- 从 MyBatis 3.2 开始使用了新的 SQL 生成器类。 如果您必须在 MyBatis 旧版本上运行，
 			在您的 < JavaClientGenerator > 配置上设置属性"useLegacyBuilder"为"true"。 -->
 			<property name="enableSubPackages" value="true" />
@@ -56,7 +57,7 @@
 
 		<!-- <table tableName="t_ip" domainObjectName="T_Ip"/> -->
 
-		<table tableName="t_cpu" domainObjectName="TCpu"></table>
+		<!-- <table tableName="t_cpu" domainObjectName="TCpu"></table>
 		<table tableName="t_graphicscard" domainObjectName="TGraphicscard"></table>
 		<table tableName="t_hardpan" domainObjectName="THardpan"></table>
 		<table tableName="t_ip" domainObjectName="TIp"></table>
@@ -65,7 +66,7 @@
 		<table tableName="t_network_card" domainObjectName="TNetworkCard"></table>
 		<table tableName="t_server_disk" domainObjectName="TServerDisk"></table>
 		<table tableName="t_sound_card" domainObjectName="TSoundCard"></table>
-		<table tableName="t_link_record" domainObjectName="TLinkRecord"></table>
+		<table tableName="t_link_record" domainObjectName="TLinkRecord"></table> -->
 
 		<!-- <table tableName="ITEM" domainObjectName="Item"
 			enableCountByExample="false" enableSelectByExample="false"
@@ -90,9 +91,9 @@
 		</table> -->
 		
 		<!-- <table>这里用的通配符匹配全部的表，另外所有表都有自动增长的id字段。如果不是所有表的配置都一样，可以做针对性的配置。 -->
-		<!-- <table tableName="%">
+		<table tableName="%">
             <generatedKey column="id" sqlStatement="Mysql"/>
-        </table> -->
+        </table>
 
 	</context>
 </generatorConfiguration>
