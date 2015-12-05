@@ -10,13 +10,19 @@
 <!-- https://github.com/mybatis/generator -->
 
 <generatorConfiguration>
-	<classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" />
+	<!-- 要添加到类路径中的 JAR/ZIP 文件的完整路径名称或要添加到类路径中的目录。 -->
+	<!-- <classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" /> -->
 
 	<context id="mysqlTables" targetRuntime="MyBatis3">
 		<!-- 前后分隔符 -->
 		<!-- <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/> -->
         
+		<!-- <property name=" javaFileEncoding" value="UTF-8"/> -->
+        
+        <!-- type		使用用户指定提供的注释生成器类型。 
+        		这个类必须继承org.mybatis.generator.api.CommentGenerator接口。而且必须有一个默认的构造函数。 
+        		这个属性接收指定特殊的值 DEFAULT，这将会使用默认的实现类（这和不指定该属性的效果一样）。 -->
 		<commentGenerator>
 			<!-- 取消xml中的注释默认false -->
 			<property name="suppressAllComments" value="false" />
@@ -42,8 +48,7 @@
 		</javaModelGenerator>
 
 		<!--对应的xml mapper文件 -->
-		<sqlMapGenerator targetPackage="com.cgl.db.m.config.sqlxml"
-			targetProject="MAVEN">
+		<sqlMapGenerator targetPackage="com.cgl.db.m.config.sqlxml" targetProject="MAVEN">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
@@ -55,8 +60,6 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-
-		<!-- <table tableName="t_ip" domainObjectName="T_Ip"/> -->
 
 		<!-- <table tableName="t_cpu" domainObjectName="TCpu"></table>
 		<table tableName="t_graphicscard" domainObjectName="TGraphicscard"></table>
@@ -72,11 +75,43 @@
 		<!-- <table tableName="ITEM" domainObjectName="Item"
 			enableCountByExample="false" enableSelectByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false">
+			
+			searchString		定义将被替换的子字符串的正则表达式。
+			replaceString		这是一个用来替换搜索字符串列每一个匹配项的字符串。如果没有指定，就会使用空字符串。
+			CUST_BUSINESS_NAME->BUSINESS_NAME
+			<columnRenamingRule searchString="^CUST_" replaceString="" />
+			
 			特定列指定对应类型
-			<columnOverride column="content" jdbcType="VARCHAR" javaType="java.lang.String"></columnOverride>
-			<columnOverride column="photo" jdbcType="BLOB"></columnOverride>
-			排除列名
-			<ignoreColumn column="FRED" />
+			property	要使用的 Java 属性的名称。如果没有指定，MBG会根据列名生成。 
+						例如，如果一个表的一列名为"STRT_DTE"， 
+						MBG会根据"useActualColumnNames"属性(查看<table> 的属性获取更多的信息)
+						生成"STRT_DTE" 或 "strtDte"。
+			javaType	该列属性的完全限定的 Java 类型。如果需要，这可以覆盖由 JavaTypeResolver 计算出的类型。 
+						对某些数据库来说， 这是必要的用来处理“奇怪的”数据库类型
+						（例如 MySql 的 unsigned bigint 类型需要映射为 java.lang.Object)。
+			jdbcType	该列的 JDBC 类型 (INTEGER, DECIMAL, NUMERIC, VARCHAR 等等)。 
+						如果需要，这可以覆盖由 JavaTypeResolver 计算出的类型。 
+						对某些数据库来说，这是必要的用来处理怪异的 JDBC 驱动 
+						(例如 DB2 的 LONGVARCHAR 类型需要为iBATIS 映射为 VARCHAR)。
+			typeHandler	用户定义的需要用来处理这列的类型处理器。 
+						它必须是一个继承iBATIS的 TypeHandler 类或 TypeHandlerCallback接口（该接口很容易继承） 的全限定的类名。 
+						如果没有指定或者是空白，iBATIS会用默认的类型处理器来处理类型。 
+						重要: MBG 不会校验这个类型处理器是否存在或者可用。 MGB只是简单的将这个值插入到生成的SQL映射的配置文件中。
+			delimitedColumnName
+						指定是否应在生成的 SQL 分隔的列名称。 
+						如果列的名称中包含空格，MGB会自动的分割列名， 
+						所以这个重写只有当列名需要强制为一个合适的名字或者列名是数据库中的保留字时是必要的。
+						当设置为 "true" 是, column 属性用于重写必须匹配从数据库返回的列名。
+						分隔符指定在 <context> 元素上。
+						默认值是false。然而MGB会自动分割包含空格的列名，所以在这种情况下不需要重写。
+			<columnOverride column="数据库列明" property="java属性名" javaType="java.lang.String" jdbcType="BLOB">
+				当前列使用真实列名
+				BUSINESS_NAME|true	BUSINESS_NAME|false	businessName
+				<property name="useActualColumnNames" value="true"/>
+			</columnOverride>
+			
+			排除列
+			<ignoreColumn column="排除列名" />
 		</table> -->
 		
 		<!-- <table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer" >
